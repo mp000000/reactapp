@@ -1,26 +1,56 @@
-import { StyleSheet, View, Text } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Modal,
+  Alert,
+  Pressable,
+} from "react-native";
+import React, { useState } from "react";
+import styles from "../styles/styles";
 
 const Card = (props) => {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={styles.container}>
-      <Text numberOfLines={1} style={{ fontWeight: "bold", fontSize: 24 }}>
-        {props.title}
-      </Text>
-      <Text numberOfLines={8}>{props.desc}</Text>
+    <View>
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.container}>
+          <View style={{ ...styles.modalView, backgroundColor: "#FFF" }}>
+            <Text style={styles.title}>{props.data.title}</Text>
+            <Text>{props.data.desc}</Text>
+            <Pressable
+              style={{ ...styles.pressable, backgroundColor: "#262626" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={styles.pressableText}>Close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.card}>
+          <Text numberOfLines={1} style={styles.title}>
+            {props.data.title}
+          </Text>
+          <Text numberOfLines={8}>{props.data.desc}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
 
 export default Card;
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    marginBottom: 10,
-    backgroundColor: "#C0C0C0",
-    borderRadius: 20,
-    width: "100%",
-    height: 200,
-  },
-});
