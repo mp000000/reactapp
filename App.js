@@ -21,6 +21,64 @@ import { MaterialIcons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  global.cities = new Map();
+  global.cities.set("0", {
+    name: "Uherské Hradiště",
+    posX: 49.05652513009945,
+    posY: 17.49190669421165,
+  });
+  global.cities.set("1", {
+    name: "Brno",
+    posX: 49.21074360996304,
+    posY: 16.610459619086303,
+  });
+  global.cities.set("2", {
+    name: "Plzeň",
+    posX: 49.73902833229202,
+    posY: 13.36903044976678,
+  });
+  global.cities.set("3", {
+    name: "Praha",
+    posX: 50.06696022210748,
+    posY: 14.429175504693859,
+  });
+  global.cities.set("4", {
+    name: "Staré Město u Uherského Hradiště",
+    posX: 49.07464435931809,
+    posY: 17.428013858715598,
+  });
+  global.events = [
+    {
+      title: "Událost #512",
+      desc: "popis události ".repeat(150),
+      key: 1,
+      city: "0",
+    },
+    {
+      title: "Událost #512",
+      desc: "popis události ".repeat(10),
+      key: 2,
+      city: "1",
+    },
+    {
+      title: "Událost #512",
+      desc: "popis události ".repeat(10),
+      key: 3,
+      city: "2",
+    },
+    {
+      title: "Událost #512",
+      desc: "popis události ".repeat(10),
+      key: 4,
+      city: "3",
+    },
+    {
+      title: "Událost #512",
+      desc: "popis události ".repeat(10),
+      key: 5,
+      city: "4",
+    },
+  ];
   return (
     <NavigationContainer>
       <Tab.Navigator

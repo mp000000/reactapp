@@ -11,10 +11,27 @@ import {
   Modal,
 } from "react-native";
 function AddEvent() {
-  const [title, changeTitle] = useState("Název");
-  const [desc, changeDesc] = useState("Popis");
+  const [title, changeTitle] = useState("");
+  const [desc, changeDesc] = useState("");
+  const [city, changeCity] = useState("");
   const submit = () => {
-    Alert.alert("Událost odeslána", `${title}\n\n${desc}`);
+    if (title === "" && desc === "") {
+      Alert.alert("Vyplňte všechna pole");
+    } else {
+      if (global.cities.has(city)) {
+        global.events.push({
+          title: title,
+          desc: desc,
+          city: city,
+          key: global.events.length + 1,
+        });
+        changeTitle("");
+        changeDesc("");
+        changeCity("");
+      } else {
+        Alert.alert("Neplatné id města");
+      }
+    }
   };
   const selectCity = () => {};
   const citySelected = () => {};
@@ -26,13 +43,21 @@ function AddEvent() {
           onChangeText={changeTitle}
           value={title}
           onEndEditing={TextInput.blur}
+          placeholder="Název"
         />
         <TextInput
           style={styles.input}
           onChangeText={changeDesc}
           value={desc}
+          placeholder="Popis"
         />
-        <Pressable
+        <TextInput
+          style={styles.input}
+          onChangeText={changeCity}
+          value={city}
+          placeholder="0-4"
+        />
+        {/* <Pressable
           style={{
             ...styles.pressable,
             backgroundColor: "#262626",
@@ -41,7 +66,7 @@ function AddEvent() {
           }}
         >
           <Text style={styles.text}>Vyberte město</Text>
-        </Pressable>
+        </Pressable> */}
         <Pressable style={styles.pressable} onPress={submit}>
           <Text style={styles.text}>Odeslat</Text>
         </Pressable>

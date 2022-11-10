@@ -1,37 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Card from "../components/Card";
 
 function Events() {
-  const events = [
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(10),
-    },
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(10),
-    },
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(10),
-    },
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(10),
-    },
-  ];
+  const [events, changeEvents] = useState([...global.events]);
   return (
     <View>
-      <ScrollView
-        style={styles.ScrollView}
-        showsVerticalScrollIndicator={false}
-      >
-        {() => {
-          events.forEach((e) => {
-            return <Card data={{ ...e, title: "Ljadslkfjalskdfj" }} />;
-          });
-        }}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {events.map((e) => (
+          <Card key={e.key} data={e} />
+        ))}
       </ScrollView>
     </View>
   );

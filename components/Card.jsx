@@ -5,10 +5,11 @@ import {
   Modal,
   Alert,
   Pressable,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import styles from "../styles/styles";
-
+import MapView, { Marker } from "react-native-maps";
 const Card = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -25,7 +26,16 @@ const Card = (props) => {
         <View style={styles.container}>
           <View style={{ ...styles.modalView, backgroundColor: "#FFF" }}>
             <Text style={styles.title}>{props.data.title}</Text>
-            <Text>{props.data.desc}</Text>
+            <Text style={{ fontWeight: "bold" }}>
+              {global.cities.get(props.data.city).name}
+            </Text>
+            <Text style={{ fontWeight: "bold" }}>{Date()}</Text>
+            <ScrollView
+              style={styles.scrollView}
+              showsVerticalScrollIndicator={false}
+            >
+              <Text>{props.data.desc}</Text>
+            </ScrollView>
             <Pressable
               style={{ ...styles.pressable, backgroundColor: "#262626" }}
               onPress={() => {
