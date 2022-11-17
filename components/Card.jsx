@@ -29,7 +29,9 @@ const Card = (props) => {
             <Text style={{ fontWeight: "bold" }}>
               {global.cities.get(props.data.city).name}
             </Text>
-            <Text style={{ fontWeight: "bold" }}>{Date()}</Text>
+            <Text style={{ fontWeight: "bold" }}>
+              {new Date(props.data.time).toUTCString()}
+            </Text>
             <ScrollView
               style={styles.scrollView}
               showsVerticalScrollIndicator={false}

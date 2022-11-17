@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Card from "../components/Card";
 
-function Events() {
-  const [events, changeEvents] = useState([...global.events]);
+function Events(props) {
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {events.map((e) => (
+        {props.events.map((e) => (
           <Card key={e.key} data={e} />
         ))}
       </ScrollView>

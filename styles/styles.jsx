@@ -57,8 +57,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     height: "40%",
-    borderWidth: 1,
-    borderRadius: 5,
     boderColor: "#262626",
   },
 });

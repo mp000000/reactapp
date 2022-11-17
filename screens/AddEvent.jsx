@@ -10,24 +10,29 @@ import {
   TouchableWithoutFeedback,
   Modal,
 } from "react-native";
-function AddEvent() {
+function AddEvent(props) {
   const [title, changeTitle] = useState("");
   const [desc, changeDesc] = useState("");
   const [city, changeCity] = useState("");
   const submit = () => {
-    if (title === "" && desc === "") {
+    if (title === "" || desc === "") {
       Alert.alert("Vyplňte všechna pole");
     } else {
       if (global.cities.has(city)) {
-        global.events.push({
-          title: title,
-          desc: desc,
-          city: city,
-          key: global.events.length + 1,
-        });
+        props.setEvents([
+          ...props.events,
+          {
+            title: title,
+            desc: desc,
+            city: city,
+            key: props.events.length + 1,
+            time: Date.now(),
+          },
+        ]);
         changeTitle("");
         changeDesc("");
         changeCity("");
+        props.navigation.navigate("Events");
       } else {
         Alert.alert("Neplatné id města");
       }

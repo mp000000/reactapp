@@ -1,17 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import CityCard from "../components/CityCard";
+import styles from "../styles/styles";
 function Cities() {
   return (
-    <View style={styles.container}>
-      <Text>Cities screen</Text>
+    <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {global.cities.forEach((value, key) => {
+          return <CityCard data={value} />;
+        })}
+      </ScrollView>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 export default Cities;
