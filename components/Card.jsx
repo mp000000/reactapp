@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import styles from "../styles/styles";
 import MapView, { Marker } from "react-native-maps";
+import { towns } from "../data/data";
 const Card = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -19,24 +20,20 @@ const Card = (props) => {
         transparent={true}
         animationType="slide"
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
         }}
       >
         <View style={styles.container}>
           <View style={{ ...styles.modalView, backgroundColor: "#FFF" }}>
-            <Text style={styles.title}>{props.data.title}</Text>
+            <Text style={styles.title}>{props.data.name}</Text>
             <Text style={{ fontWeight: "bold" }}>
-              {global.cities.get(props.data.city).name}
-            </Text>
-            <Text style={{ fontWeight: "bold" }}>
-              {new Date(props.data.time).toUTCString()}
+              {towns[props.data.town_id].name}
             </Text>
             <ScrollView
               style={styles.scrollView}
               showsVerticalScrollIndicator={false}
             >
-              <Text>{props.data.desc}</Text>
+              <Text>{props.data.text}</Text>
             </ScrollView>
             <Pressable
               style={{ ...styles.pressable, backgroundColor: "#262626" }}
@@ -56,9 +53,9 @@ const Card = (props) => {
       >
         <View style={styles.card}>
           <Text numberOfLines={1} style={styles.title}>
-            {props.data.title}
+            {props.data.name}
           </Text>
-          <Text numberOfLines={8}>{props.data.desc}</Text>
+          <Text numberOfLines={8}>{props.data.text}</Text>
         </View>
       </TouchableWithoutFeedback>
     </View>

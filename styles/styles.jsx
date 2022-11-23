@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
   },
+  mapView: {
+    height: 200,
+    width: "100%",
+  },
   modalView: {
     alignItems: "center",
     justifyContent: "center",
@@ -51,9 +55,27 @@ const styles = StyleSheet.create({
     elevation: 5,
     width: "90%",
   },
+  text: {
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+  },
   title: {
     fontWeight: "bold",
     fontSize: 24,
+  },
+  townCardLogo: {
+    flex: 1,
+    backgroundColor: "royalblue",
+  },
+  townCardText: {
+    flex: 1,
+    backgroundColor: "tomato",
+  },
+  townLogo: {
+    height: 130,
+    width: "100%",
+    resizeMode: "contain",
   },
   scrollView: {
     height: "40%",

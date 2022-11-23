@@ -10,36 +10,35 @@ import {
   TouchableWithoutFeedback,
   Modal,
 } from "react-native";
+import styles from "../styles/styles";
+import { towns } from "../data/data";
 function AddEvent(props) {
-  const [title, changeTitle] = useState("");
-  const [desc, changeDesc] = useState("");
-  const [city, changeCity] = useState("");
+  const [title, changeTitle] = useState();
+  const [desc, changeDesc] = useState();
+  const [town, changeTown] = useState();
   const submit = () => {
     if (title === "" || desc === "") {
       Alert.alert("Vyplňte všechna pole");
     } else {
-      if (global.cities.has(city)) {
+      if (towns[town]) {
         props.setEvents([
           ...props.events,
           {
-            title: title,
-            desc: desc,
-            city: city,
-            key: props.events.length + 1,
-            time: Date.now(),
+            name: title,
+            text: desc,
+            town_id: town,
+            id: props.events.length + 1,
           },
         ]);
         changeTitle("");
         changeDesc("");
-        changeCity("");
+        changeTown("");
         props.navigation.navigate("Events");
       } else {
         Alert.alert("Neplatné id města");
       }
     }
   };
-  const selectCity = () => {};
-  const citySelected = () => {};
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -58,20 +57,10 @@ function AddEvent(props) {
         />
         <TextInput
           style={styles.input}
-          onChangeText={changeCity}
-          value={city}
-          placeholder="0-4"
+          onChangeText={changeTown}
+          value={town}
+          placeholder="1-2"
         />
-        {/* <Pressable
-          style={{
-            ...styles.pressable,
-            backgroundColor: "#262626",
-            width: "80%",
-            borderRadius: 5,
-          }}
-        >
-          <Text style={styles.text}>Vyberte město</Text>
-        </Pressable> */}
         <Pressable style={styles.pressable} onPress={submit}>
           <Text style={styles.text}>Odeslat</Text>
         </Pressable>
@@ -79,31 +68,5 @@ function AddEvent(props) {
     </TouchableWithoutFeedback>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    height: 40,
-    margin: 10,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
-    width: "80%",
-  },
-  pressable: {
-    borderRadius: 20,
-    backgroundColor: "tomato",
-    padding: 10,
-    width: "40%",
-    margin: 10,
-  },
-  text: {
-    textAlign: "center",
-    color: "white",
-    fontWeight: "bold",
-  },
-});
+
 export default AddEvent;

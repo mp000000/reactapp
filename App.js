@@ -11,108 +11,18 @@ import {
 import { useState } from "react";
 import Card from "./components/Card";
 import AddEvent from "./screens/AddEvent";
-import Cities from "./screens/Cities";
+import Towns from "./screens/Towns";
 import Events from "./screens/Events";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
+import { events } from "./data/data";
 
 const Tab = createBottomTabNavigator();
-global.cities = new Map();
-global.cities.set("0", {
-  name: "Uherské Hradiště",
-  region: "Zlínský kraj",
-  street: "HUH?",
-  logo: "https://www.mesto-uh.cz/uploads/gallery/detail/1461.jpg",
-  phone: "HUH?",
-  ico: Math.floor(Math.random() * 1000000),
-  dic: Math.floor(Math.random() * 1000000),
-  posX: 49.05652513009945,
-  posY: 17.49190669421165,
-});
-global.cities.set("1", {
-  name: "Brno",
-  region: "Jihomoravský kraj",
-  street: "HUH?",
-  logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Logo_Brno.svg/1280px-Logo_Brno.svg.png",
-  phone: "HUH?",
-  ico: Math.floor(Math.random() * 1000000),
-  dic: Math.floor(Math.random() * 1000000),
-  posX: 49.21074360996304,
-  posY: 16.610459619086303,
-});
-global.cities.set("2", {
-  name: "Plzeň",
-  region: "Plzeňský kraj",
-  street: "HUH?",
-  logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Logo_of_Pilsen.svg/1920px-Logo_of_Pilsen.svg.png",
-  phone: "HUH?",
-  ico: Math.floor(Math.random() * 1000000),
-  dic: Math.floor(Math.random() * 1000000),
-  posX: 49.73902833229202,
-  posY: 13.36903044976678,
-});
-global.cities.set("3", {
-  name: "Praha",
-  region: "Praha",
-  street: "HUH?",
-  logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Logo_Praha.svg/800px-Logo_Praha.svg.png",
-  phone: "HUH?",
-  ico: Math.floor(Math.random() * 1000000),
-  dic: Math.floor(Math.random() * 1000000),
-  posX: 50.06696022210748,
-  posY: 14.429175504693859,
-});
-global.cities.set("4", {
-  name: "Staré Město u Uherského Hradiště",
-  region: "Zlínský kraj",
-  street: "HUH?",
-  logo: "https://regiony.kurzy.cz/obrazky/znak/stare-mesto-okres-uherske-hradiste.png",
-  phone: "HUH?",
-  ico: Math.floor(Math.random() * 1000000),
-  dic: Math.floor(Math.random() * 1000000),
-  posX: 49.07464435931809,
-  posY: 17.428013858715598,
-});
+
 export default function App() {
-  const [events, setEvents] = useState([
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(150),
-      key: 1,
-      city: "0",
-      time: Date.now(),
-    },
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(10),
-      key: 2,
-      city: "1",
-      time: Date.now(),
-    },
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(10),
-      key: 3,
-      city: "2",
-      time: Date.now(),
-    },
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(10),
-      key: 4,
-      city: "3",
-      time: Date.now(),
-    },
-    {
-      title: "Událost #512",
-      desc: "popis události ".repeat(10),
-      key: 5,
-      city: "4",
-      time: Date.now(),
-    },
-  ]);
+  const [eventsState, setEventsState] = useState(events);
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -123,7 +33,7 @@ export default function App() {
               case "Events":
                 icon = "event";
                 break;
-              case "Cities":
+              case "Towns":
                 icon = "location-city";
                 break;
               case "AddEvent":
@@ -145,20 +55,30 @@ export default function App() {
       >
         <Tab.Screen name="Events">
           {(props) => {
-            return <Events {...props} events={events} setEvents={setEvents} />;
+            return (
+              <Events
+                {...props}
+                events={eventsState}
+                setEvents={setEventsState}
+              />
+            );
           }}
         </Tab.Screen>
         <Tab.Screen name="AddEvent">
           {(props) => {
             return (
-              <AddEvent {...props} events={events} setEvents={setEvents} />
+              <AddEvent
+                {...props}
+                events={eventsState}
+                setEvents={setEventsState}
+              />
             );
           }}
         </Tab.Screen>
 
-        <Tab.Screen name="Cities">
-          {() => {
-            <Cities />;
+        <Tab.Screen name="Towns">
+          {(props) => {
+            return <Towns {...props} />;
           }}
         </Tab.Screen>
       </Tab.Navigator>

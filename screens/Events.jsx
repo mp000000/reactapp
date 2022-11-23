@@ -7,7 +7,7 @@ function Events(props) {
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {props.events.map((e) => (
-          <Card key={e.key} data={e} />
+          <Card key={e.id} data={e} />
         ))}
       </ScrollView>
     </View>
