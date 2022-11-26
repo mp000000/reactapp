@@ -27,7 +27,15 @@ const TownCard = (props) => {
           <Image source={{ uri: props.data.logo }} style={styles.townLogo} />
         </View>
       </View>
-      <MapView style={styles.mapView}>
+      <MapView
+        style={styles.mapView}
+        initialRegion={{
+          latitude: props.data.coords.lat,
+          longitude: props.data.coords.lng,
+          latitudeDelta: 1,
+          longitudeDelta: 1,
+        }}
+      >
         <Marker
           coordinate={{
             latitude: props.data.coords.lat,

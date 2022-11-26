@@ -22,21 +22,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
   },
-  pressable: {
-    borderRadius: 20,
-    backgroundColor: "tomato",
-    padding: 10,
-    width: "40%",
-    margin: 10,
-  },
-  pressableText: {
-    textAlign: "center",
-    color: "white",
-    fontWeight: "bold",
-  },
   mapView: {
     height: 200,
     width: "100%",
+  },
+  loadingScreen: {
+    alignItems: "center",
+    justifyContent: "center",
   },
   modalView: {
     alignItems: "center",
@@ -55,6 +47,18 @@ const styles = StyleSheet.create({
     elevation: 5,
     width: "90%",
   },
+  pressable: {
+    borderRadius: 20,
+    backgroundColor: "tomato",
+    padding: 10,
+    width: "40%",
+    margin: 10,
+  },
+  pressableText: {
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+  },
   text: {
     textAlign: "center",
     color: "white",
@@ -66,11 +70,9 @@ const styles = StyleSheet.create({
   },
   townCardLogo: {
     flex: 1,
-    backgroundColor: "royalblue",
   },
   townCardText: {
     flex: 1,
-    backgroundColor: "tomato",
   },
   townLogo: {
     height: 130,

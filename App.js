@@ -17,12 +17,25 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
-import { events } from "./data/data";
+import { getEvents } from "./data/events";
+import styles from "./styles/styles";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [eventsState, setEventsState] = useState(events);
+  const [eventsState, setEventsState] = useState(null);
+  getEvents()
+    .then((data) => {
+      setEventsState(data);
+    })
+    .catch(() => {});
+  if (!eventsState) {
+    return (
+      <View style={styles.loadingScreen}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -85,37 +98,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-  },
-  container1: {
-    flex: 1,
-    paddingTop: 20,
-    backgroundColor: "#FFF",
-  },
-  scroll: {
-    padding: 20,
-    paddingBottom: 0,
-    marginBottom: 70,
-  },
-  nav: {
-    paddingTop: 3,
-    flex: 1,
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    height: 70,
-    backgroundColor: "#262626",
-    zIndex: 2,
-    flexDirection: "row",
-  },
-  button: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFF",
-  },
-});
