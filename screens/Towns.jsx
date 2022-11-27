@@ -5,19 +5,13 @@ import styles from "../styles/styles";
 import { getTown, getTownIds } from "../data/towns";
 
 function Towns() {
-  const [towns, setTowns] = useState([]);
+  const [towns, setTowns] = useState();
   getTownIds()
     .then((data) => {
-      console.log(data.ids);
-      data.ids.forEach((d) => {
-        getTown(d).then((t) => {
-          setTowns([...towns, t]);
-          console.log(towns);
-        });
-      });
+      setTowns(data);
     })
     .catch(() => {});
-  if (towns.length < 1) {
+  if (!towns) {
     return (
       <View style={styles.loadingScreen}>
         <Text>Loading...</Text>
@@ -27,8 +21,9 @@ function Towns() {
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {towns.map((e) => {
-          return <TownCard key={e.id} data={e} />;
+        {towns.ids.map((e) => {
+          console.log(e);
+          return <TownCard key={"" + e} />;
         })}
       </ScrollView>
     </View>
