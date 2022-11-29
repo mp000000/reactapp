@@ -23,12 +23,14 @@ import styles from "./styles/styles";
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [eventsState, setEventsState] = useState(null);
-  getEvents()
-    .then((data) => {
-      setEventsState(data);
-    })
-    .catch(() => {});
+  const [eventsState, setEventsState] = useState();
+  if (!eventsState) {
+    getEvents()
+      .then((data) => {
+        setEventsState(data);
+      })
+      .catch(() => {});
+  }
   if (!eventsState) {
     return (
       <View style={styles.loadingScreen}>

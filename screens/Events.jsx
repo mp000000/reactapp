@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Card from "../components/Card";
 
-function Events(props) {
+function Events({ events }) {
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {props.events.map((e) => (
+        {events.map((e) => (
           <Card key={e.id} data={e} />
         ))}
       </ScrollView>

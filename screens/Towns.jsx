@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import TownCard from "../components/TownCard";
 import styles from "../styles/styles";
@@ -6,11 +6,13 @@ import { getTown, getTownIds } from "../data/towns";
 
 function Towns() {
   const [towns, setTowns] = useState();
-  getTownIds()
-    .then((data) => {
-      setTowns(data);
-    })
-    .catch(() => {});
+  useEffect(() => {
+    getTownIds()
+      .then((data) => {
+        setTowns(data);
+      })
+      .catch(() => {});
+  }, []);
   if (!towns) {
     return (
       <View style={styles.loadingScreen}>
@@ -22,8 +24,7 @@ function Towns() {
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {towns.ids.map((e) => {
-          console.log(e);
-          return <TownCard key={"" + e} />;
+          return <TownCard key={e} data={e} />;
         })}
       </ScrollView>
     </View>

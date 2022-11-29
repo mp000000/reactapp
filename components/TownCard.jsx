@@ -8,15 +8,19 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/styles";
 import MapView, { Marker } from "react-native-maps";
 import { getTown } from "../data/towns";
-const TownCard = (props) => {
+const TownCard = ({ data }) => {
   const [town, setTown] = useState();
-  getTown(props.key).then((data) => {
-    setTown(data);
-  });
+  useEffect(() => {
+    getTown(data)
+      .then((dat) => {
+        setTown(dat);
+      })
+      .catch(() => {});
+  }, [data]);
   if (!town) {
     return (
       <View style={{ ...styles.card, height: 370 }}>
