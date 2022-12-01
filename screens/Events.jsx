@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import Card from "../components/Card";
 
 function Events({ events }) {
+  const renderCard = ({ item }) => {
+    {
+      console.log(item);
+    }
+    <Card data={item} />;
+  };
   return (
     <View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <FlatList
+        data={events}
+        renderItem={renderCard}
+        keyExtractor={(item) => item.id}
+      />
+      {/* <ScrollView showsVerticalScrollIndicator={false}>
         {events.map((e) => (
           <Card key={e.id} data={e} />
         ))}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 }
