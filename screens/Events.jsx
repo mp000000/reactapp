@@ -5,16 +5,16 @@ import Card from "../components/Card";
 
 function Events({ events }) {
   const renderCard = ({ item }) => {
-    {
-      console.log(item);
-    }
     <Card data={item} />;
   };
   return (
     <View>
       <FlatList
         data={events}
-        renderItem={renderCard}
+        renderItem={(e) => {
+          <Card data={e.item} />;
+          console.log(e.item);
+        }}
         keyExtractor={(item) => item.id}
       />
       {/* <ScrollView showsVerticalScrollIndicator={false}>
