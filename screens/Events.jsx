@@ -11,10 +11,7 @@ function Events({ events }) {
     <View>
       <FlatList
         data={events}
-        renderItem={(e) => {
-          <Card data={e.item} />;
-          console.log(e.item);
-        }}
+        renderItem={(e) => <Card data={e.item} />}
         keyExtractor={(item) => item.id}
       />
       {/* <ScrollView showsVerticalScrollIndicator={false}>

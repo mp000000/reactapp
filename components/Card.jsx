@@ -12,7 +12,6 @@ import styles from "../styles/styles";
 import MapView, { Marker } from "react-native-maps";
 import { towns } from "../data/data";
 const Card = (props) => {
-  console.log(props);
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View>
